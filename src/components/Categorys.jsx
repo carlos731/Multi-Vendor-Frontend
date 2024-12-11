@@ -48,6 +48,13 @@ const Categorys = () => {
 
     return (
         <div className='w-[87%] mx-auto relative'>
+            <div className='w-full'>
+                <div className='text-center flex justify-center items-center flex-col text-4xl text-slate-600 font-bold relative pb-[35px]'>
+                    <h2>Top Category</h2>
+                    <div className='w-[100px] h-[2px] bg-[#059473] mt-4'></div>
+                </div>
+            </div>
+
             <Carousel
                 autoPlay={true}
                 infinite={true}
@@ -58,7 +65,7 @@ const Categorys = () => {
                 {
                     categorys.map((c, i) => <Link className='h-[185px] border block' key={i} to='#'>
                         <div className='w-full h-full relative p-3'>
-                            <img className='w-full h-full' src={`http://localhost:3000/images/products/${i+1}.webp`} alt='' />
+                            <img className='w-full h-full' src={`http://localhost:3000/images/products/${i + 1}.webp`} alt='' />
                             <div className='absolute bottom-6 w-full mx-auto font-bold left-0 flex justify-center items-center'>
                                 <span className='py-[2px] px-6 bg-[#3330305d] text-white'>{c}</span>
                             </div>
