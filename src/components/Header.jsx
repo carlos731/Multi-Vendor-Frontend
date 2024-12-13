@@ -110,6 +110,7 @@ const Header = () => {
                                 <ul className='flex justify-start items-start gap-8 text-sm font-bold uppercase md-lg:hidden'>
                                     <li>
                                         <Link
+                                            to='/'
                                             className={`p-2 block ${pathname === '/' ? 'text-[#059473]' : 'text-slate-600'} `}
                                         >
                                             Home
@@ -117,13 +118,15 @@ const Header = () => {
                                     </li>
                                     <li>
                                         <Link
-                                            className={`p-2 block ${pathname === '/shop' ? 'text-[#059473]' : 'text-slate-600'} `}
+                                            to='/shops'
+                                            className={`p-2 block ${pathname === '/shops' ? 'text-[#059473]' : 'text-slate-600'} `}
                                         >
                                             Shop
                                         </Link>
                                     </li>
                                     <li>
                                         <Link
+                                            to='/blog'
                                             className={`p-2 block ${pathname === '/Blog' ? 'text-[#059473]' : 'text-slate-600'} `}
                                         >
                                             Blog
@@ -131,6 +134,7 @@ const Header = () => {
                                     </li>
                                     <li>
                                         <Link
+                                            to='/about'
                                             className={`p-2 block ${pathname === '/about' ? 'text-[#059473]' : 'text-slate-600'} `}
                                         >
                                             About Us
@@ -138,6 +142,7 @@ const Header = () => {
                                     </li>
                                     <li>
                                         <Link
+                                            to='/contact'
                                             className={`p-2 block ${pathname === '/contact' ? 'text-[#059473]' : 'text-slate-600'} `}
                                         >
                                             Contact Us
@@ -218,6 +223,7 @@ const Header = () => {
                         <ul className='flex flex-col justify-start items-start text-sm font-bold uppercase'>
                             <li>
                                 <Link
+                                    to='/'
                                     className={`py-2 block ${pathname === '/' ? 'text-[#059473]' : 'text-slate-600'} `}
                                 >
                                     Home
@@ -225,6 +231,7 @@ const Header = () => {
                             </li>
                             <li>
                                 <Link
+                                    to='/shops'
                                     className={`py-2 block ${pathname === '/shop' ? 'text-[#059473]' : 'text-slate-600'} `}
                                 >
                                     Shop
@@ -232,6 +239,7 @@ const Header = () => {
                             </li>
                             <li>
                                 <Link
+                                    to='/blog'
                                     className={`py-2 block ${pathname === '/Blog' ? 'text-[#059473]' : 'text-slate-600'} `}
                                 >
                                     Blog
@@ -239,6 +247,7 @@ const Header = () => {
                             </li>
                             <li>
                                 <Link
+                                    to='/about'
                                     className={`py-2 block ${pathname === '/about' ? 'text-[#059473]' : 'text-slate-600'} `}
                                 >
                                     About Us
@@ -246,6 +255,7 @@ const Header = () => {
                             </li>
                             <li>
                                 <Link
+                                    to='/contact'
                                     className={`py-2 block ${pathname === '/contact' ? 'text-[#059473]' : 'text-slate-600'} `}
                                 >
                                     Contact Us
