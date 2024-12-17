@@ -305,6 +305,7 @@ const Header = () => {
                                 <span className={`pt-1 ${categoryShow ? 'rotate-0' : 'rotate-180'} duration-500`}><IoIosArrowDown /></span>
                             </div>
 
+                            {/* h-fit */}
                             <div className={`${categoryShow ? 'h-0' : 'h-[400px]'} overflow-hidden transition-all 
                                 md-lg:relative duration-500 absolute z-[99999] bg-[#dbf3ed] w-full border-x`}>
                                 <ul className='py-2 text-slate-600 font-medium'>
