@@ -154,6 +154,7 @@ const Reviews = () => {
                                 <textarea
                                     className='border outline-0 p-3 w-full'
                                     required name="" id="" cols="30" rows="5"
+                                    placeholder='Write your review'
                                 ></textarea>
 
                                 <div className='mt-2'>

@@ -336,7 +336,7 @@ const Header = () => {
                                         >
                                             <option value=''>Select Category</option>
                                             {
-                                                categorys.map((c, i) => <option value={c}>
+                                                categorys.map((c, i) => <option key={i} value={c}>
                                                     {c}
                                                 </option>)
                                             }
