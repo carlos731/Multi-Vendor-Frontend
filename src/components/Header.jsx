@@ -5,22 +5,22 @@ import { FaFacebookF, FaGithub, FaHeart, FaLinkedin, FaList, FaLock, FaPhoneAlt,
 import { Link, useLocation } from 'react-router-dom';
 import { FaCartShopping } from 'react-icons/fa6';
 
-const Header = () => {
+const Header = ({ categorys }) => {
     const { pathname } = useLocation();
     const [showShidebar, setShowShidebar] = useState(true);
     const [categoryShow, setCategoryShow] = useState(true);
     const user = true;
     const wishlist_count = 3;
-    const categorys = [
-        'Mobiles',
-        'Laptops',
-        'Speakers',
-        'Top wear',
-        'Footwear',
-        'Watches',
-        'Home Decor',
-        'Smart Watches',
-    ];
+    // const categorys = [
+    //     'Mobiles',
+    //     'Laptops',
+    //     'Speakers',
+    //     'Top wear',
+    //     'Footwear',
+    //     'Watches',
+    //     'Home Decor',
+    //     'Smart Watches',
+    // ];
 
     const [searchValue, setSearchValue] = useState('');
     const [category, setCategory] = useState('');
@@ -313,7 +313,8 @@ const Header = () => {
                                         categorys.map((c, i) => {
                                             return (
                                                 <li key={i} className='flex justify-start items-center gap-2 px-[24px] py-[6px]'>
-                                                    <Link className='text-sm block'>{c}</Link>
+                                                    <img className='w-[30px] h-[30px] rounded-full overflow-hidden' src={c.image} alt=''/>
+                                                    <Link className='text-sm block'>{c.name}</Link>
                                                 </li>
                                             )
                                         })
@@ -337,7 +338,7 @@ const Header = () => {
                                             <option value=''>Select Category</option>
                                             {
                                                 categorys.map((c, i) => <option key={i} value={c}>
-                                                    {c}
+                                                    {c.name}
                                                 </option>)
                                             }
                                         </select>

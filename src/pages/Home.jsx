@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Banner from '../components/Banner';
 import Categorys from '../components/Categorys';
 import FeatureProducts from '../components/products/FeatureProducts';
 import Products from '../components/products/Products';
 import Footer from '../components/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { get_category } from '../store/reducers/homeReducer';
 
 const Home = () => {
+    const dispatch = useDispatch();
+    const { categorys } = useSelector(state => state.home);
+    useEffect(() => {
+        dispatch(get_category());
+    }, []);
+
     return (
         <div className='w-full'>
-            <Header />
+            <Header categorys={categorys} />
             <Banner />
-            <Categorys />
+            <Categorys categorys={categorys} />
             <div className='py-[45px]'>
                 <FeatureProducts />
             </div>
@@ -22,7 +30,7 @@ const Home = () => {
                         <div className='overflow-hidden'>
                             <Products title='Latest Product' />
                         </div>
-                        
+
                         <div className='overflow-hidden'>
                             <Products title='Top Rated Product' />
                         </div>
