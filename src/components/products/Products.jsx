@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import 'react-multi-carousel/lib/styles.css';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
-const Products = ({ title }) => {
-    const products = [
-        [1, 2, 3],
-        [4, 5, 6],
-    ];
+const Products = ({ title, products }) => {
+    // const products = [
+    //     [1, 2, 3],
+    //     [4, 5, 6],
+    // ];
 
     const responsive = {
         superLargeDesktop: {
@@ -65,10 +65,10 @@ const Products = ({ title }) => {
                                 {
                                     p.map((pl, j) =>
                                         <Link key={j} className='flex justify-start items-start' to='#'>
-                                            <img className='w-[110px] h-[110px]' src={`http://localhost:3000/images/products/${pl}.webp`} alt="" />
+                                            <img className='w-[110px] h-[110px]' src={pl.images[0]} alt="" />
                                             <div className='px-3 flex justify-start items-start gap-1 flex-col text-slate-600'>
-                                                <h2>Product Name </h2>
-                                                <span className='text-lg font-bold'>$434</span>
+                                                <h2>{pl.name} </h2>
+                                                <span className='text-lg font-bold'>{pl.price}</span>
                                             </div>
                                         </Link>
                                     )

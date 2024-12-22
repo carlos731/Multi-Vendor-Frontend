@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
@@ -13,6 +13,8 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { get_category } from '../store/reducers/homeReducer';
 
 const Details = () => {
     const images = [1, 2, 3, 4, 5, 6];
@@ -52,9 +54,15 @@ const Details = () => {
         },
     }
 
+    const dispatch = useDispatch();
+    const { categorys } = useSelector(state => state.home);
+    useEffect(() => {
+        dispatch(get_category());
+    }, []);
+
     return (
         <div>
-            <Header />
+            <Header categorys={categorys} />
 
             <section className='bg-[url("http://localhost:3000/images/banner/shop.png")] h-[220px] mt-6 bg-cover bg-no-repeat relative bg-left'>
                 <div className='absolute left-0 top-0 w-full h-full bg-[#2422228a]'>
