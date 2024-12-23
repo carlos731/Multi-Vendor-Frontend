@@ -4,8 +4,9 @@ import { IoIosArrowDown, IoMdArrowDropdown, IoMdPhonePortrait } from 'react-icon
 import { FaFacebookF, FaGithub, FaHeart, FaLinkedin, FaList, FaLock, FaPhoneAlt, FaTwitter, FaUser } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import { FaCartShopping } from 'react-icons/fa6';
+import { useSelector } from 'react-redux';
 
-const Header = ({ categorys }) => {
+const Header = () => {
     const { pathname } = useLocation();
     const [showShidebar, setShowShidebar] = useState(true);
     const [categoryShow, setCategoryShow] = useState(true);
@@ -24,6 +25,8 @@ const Header = ({ categorys }) => {
 
     const [searchValue, setSearchValue] = useState('');
     const [category, setCategory] = useState('');
+
+    const { categorys } = useSelector(state => state.home);
 
     return (
         <div className='w-full bg-white'>
