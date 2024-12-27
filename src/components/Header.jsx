@@ -2,16 +2,19 @@ import React, { useState } from 'react';
 import { MdEmail } from 'react-icons/md';
 import { IoIosArrowDown, IoMdArrowDropdown, IoMdPhonePortrait } from 'react-icons/io';
 import { FaFacebookF, FaGithub, FaHeart, FaLinkedin, FaList, FaLock, FaPhoneAlt, FaTwitter, FaUser } from 'react-icons/fa';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaCartShopping } from 'react-icons/fa6';
 import { useSelector } from 'react-redux';
 
 const Header = () => {
+    const navigate = useNavigate();
+
     const { pathname } = useLocation();
     const [showShidebar, setShowShidebar] = useState(true);
     const [categoryShow, setCategoryShow] = useState(true);
     const user = true;
     const wishlist_count = 3;
+    
     // const categorys = [
     //     'Mobiles',
     //     'Laptops',
@@ -27,6 +30,12 @@ const Header = () => {
     const [category, setCategory] = useState('');
 
     const { categorys } = useSelector(state => state.home);
+
+    const search = () => {
+        // console.log(category);
+        // console.log(searchValue);
+        navigate(`/products/search?category=${category}&&value=${searchValue}`);
+    }
 
     return (
         <div className='w-full bg-white'>
@@ -340,7 +349,7 @@ const Header = () => {
                                         >
                                             <option value=''>Select Category</option>
                                             {
-                                                categorys.map((c, i) => <option key={i} value={c}>
+                                                categorys.map((c, i) => <option key={i} value={c.name}>
                                                     {c.name}
                                                 </option>)
                                             }
@@ -354,6 +363,7 @@ const Header = () => {
                                     />
 
                                     <button
+                                        onClick={search}
                                         className='bg-[#059473] right-0 absolute px-8 h-full font-semibold uppercase text-white'
                                     >
                                         Search
