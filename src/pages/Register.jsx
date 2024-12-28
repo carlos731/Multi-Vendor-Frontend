@@ -1,43 +1,60 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { FaFacebookF } from 'react-icons/fa';
 import { FaGoogle } from 'react-icons/fa6';
 import { Link, useNavigate } from 'react-router-dom';
-import { ClipLoader } from 'react-spinners'
+import { ClipLoader, FadeLoader } from 'react-spinners'
+import { useDispatch, useSelector } from 'react-redux';
+import { customer_register, messageClear } from '../store/reducers/authReducer';
+import toast from 'react-hot-toast';
 
 const Register = () => {
+
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
+    const { loader, errorMessage, successMessage, userInfo } = useSelector(state => state.auth)
 
     const [state, setState] = useState({
         name: '',
         email: '',
-        password: '',
-    });
+        password: ''
+    })
+    const dispatch = useDispatch()
 
     const inputHandle = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
-        });
+        })
     }
 
     const register = (e) => {
         e.preventDefault();
-        console.log(state);
-
-        setLoading(true);
-
-        setTimeout(() => {
-            console.log(state);
-            setLoading(false);
-            navigate('/home');
-        }, 2000);
+        dispatch(customer_register(state));
     }
+
+    useEffect(() => {
+        if (successMessage) {
+            toast.success(successMessage);
+            dispatch(messageClear());
+        }
+        if (errorMessage) {
+            toast.error(errorMessage);
+            dispatch(messageClear());
+        }
+    }, [successMessage, errorMessage]);
 
     return (
         <div>
+
+            {
+                loader &&
+                <div className='w-screen h-screen flex justify-center items-center fixed 
+                left-0 top-0 bg-[#38303033] z-[999]'>
+                    <FadeLoader />
+                </div>
+            }
+
             <Header />
 
             <div className='bg-slate-200 mt-4'>
@@ -83,7 +100,7 @@ const Register = () => {
                                         text-white rounded-md flex items-center justify-center h-10 active:scale-90
                                         transition-all duration-300'
                                     >
-                                        {loading ? (
+                                        {loader ? (
                                             <ClipLoader color="#ffffff" size={20} />
                                         ) : (
                                             'Register'
