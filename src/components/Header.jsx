@@ -37,6 +37,8 @@ const Header = () => {
         navigate(`/products/search?category=${category}&&value=${searchValue}`);
     }
 
+    const { userInfo } = useSelector(state => state.auth);
+
     return (
         <div className='w-full bg-white'>
             <div className='header-top bg-[#caddff] md-lg:hidden'>
@@ -75,13 +77,13 @@ const Header = () => {
                                 </div>
 
                                 {
-                                    user ?
+                                    userInfo ?
                                         <Link
                                             className='flex cursor-pointer justify-center items-center gap-2 text-sm text-black'
                                             to='/dashboard'
                                         >
                                             <span><FaUser /></span>
-                                            <span>Carlos Henrique</span>
+                                            <span>{userInfo.name}</span>
                                         </Link>
                                         :
                                         <Link
@@ -213,13 +215,13 @@ const Header = () => {
                             </div>
 
                             {
-                                user ?
+                                userInfo ?
                                     <Link
                                         className='flex cursor-pointer justify-center items-center gap-2 text-sm text-black'
                                         to='/dashboard'
                                     >
                                         <span><FaUser /></span>
-                                        <span>Carlos Henrique</span>
+                                        <span>{userInfo.name}</span>
                                     </Link>
                                     :
                                     <Link

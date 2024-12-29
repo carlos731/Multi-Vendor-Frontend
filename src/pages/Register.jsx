@@ -42,6 +42,9 @@ const Register = () => {
             toast.error(errorMessage);
             dispatch(messageClear());
         }
+        if (userInfo) {
+            navigate('/');
+        }
     }, [successMessage, errorMessage]);
 
     return (
