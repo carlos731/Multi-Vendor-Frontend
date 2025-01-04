@@ -14,7 +14,7 @@ const Header = () => {
     const [categoryShow, setCategoryShow] = useState(true);
     const user = false;
     const wishlist_count = 3;
-    
+
     // const categorys = [
     //     'Mobiles',
     //     'Laptops',
@@ -30,6 +30,8 @@ const Header = () => {
     const [category, setCategory] = useState('');
 
     const { categorys } = useSelector(state => state.home);
+    const { userInfo } = useSelector(state => state.auth);
+    const { card_product_count } = useSelector(state => state.card);
 
     const search = () => {
         // console.log(category);
@@ -37,7 +39,13 @@ const Header = () => {
         navigate(`/products/search?category=${category}&&value=${searchValue}`);
     }
 
-    const { userInfo } = useSelector(state => state.auth);
+    const redirect_card_page = () => {
+        if (userInfo) {
+            navigate('/card')
+        } else {
+            navigate('/login')
+        }
+    }
 
     return (
         <div className='w-full bg-white'>
@@ -174,13 +182,16 @@ const Header = () => {
                                                 }
                                             </div>
                                         </div>
-                                        <div className='relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]'>
+                                        <div onClick={redirect_card_page} className='relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]'>
                                             <span className='text-xl text-green-500'><FaCartShopping /></span>
-                                            <div className='w-[20px] h-[20px] absolute bg-red-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px]'>
-                                                {
-                                                    wishlist_count
-                                                }
-                                            </div>
+                                            {
+                                                card_product_count !== 0 &&
+                                                <div className='w-[20px] h-[20px] absolute bg-red-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px]'>
+                                                    {
+                                                        card_product_count
+                                                    }
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -327,7 +338,7 @@ const Header = () => {
                                         categorys.map((c, i) => {
                                             return (
                                                 <li key={i} className='flex justify-start items-center gap-2 px-[24px] py-[6px]'>
-                                                    <img className='w-[30px] h-[30px] rounded-full overflow-hidden' src={c.image} alt=''/>
+                                                    <img className='w-[30px] h-[30px] rounded-full overflow-hidden' src={c.image} alt='' />
                                                     <Link to={`/products?category=${c.name}`} className='text-sm block'>{c.name}</Link>
                                                 </li>
                                             )
