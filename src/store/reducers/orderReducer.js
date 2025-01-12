@@ -22,6 +22,19 @@ export const placer_order = createAsyncThunk(
     }
 );
 
+export const get_orders = createAsyncThunk(
+    'order/get_orders',
+    async ({ customerId, status }, { rejectWithValue, fulfillWithValue }) => {
+        try {
+            const { data } = await api.get(`/home/customer/get-orders/${customerId}/${status}`);
+            // console.log(data);
+            return fulfillWithValue(data);
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
 export const orderReducer = createSlice({
     name: 'order',
     initialState: {
@@ -37,6 +50,10 @@ export const orderReducer = createSlice({
         }
     },
     extraReducers: (builder) => {
+        builder
+            .addCase(get_orders.fulfilled, (state, { payload }) => {
+                state.myOrders = payload.orders;
+            })
     }
 });
 
