@@ -66,6 +66,19 @@ export const quantity_dec = createAsyncThunk(
     }
 );
 
+export const add_to_wishlist = createAsyncThunk(
+    'wishlist/add_to_wishlist',
+    async (info, { rejectWithValue, fulfillWithValue }) => {
+        try {
+            const { data } = await api.post('/home/product/add-to-wishlist', info);
+            // console.log(data);
+            return fulfillWithValue(data);
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
 export const cardReducer = createSlice({
     name: 'card',
     initialState: {
@@ -113,6 +126,14 @@ export const cardReducer = createSlice({
             })
             .addCase(quantity_dec.fulfilled, (state, { payload }) => {
                 state.successMessage = payload.message;
+            })
+
+            .addCase(add_to_wishlist.rejected, (state, { payload }) => {
+                state.errorMessage = payload.error;
+            })
+            .addCase(add_to_wishlist.fulfilled, (state, { payload }) => {
+                state.successMessage = payload.message;
+                state.wishlist_count = state.wishlist_count > 0 ? state.wishlist_count + 1 : 1;
             })
     }
 });
