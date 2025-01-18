@@ -16,7 +16,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { product_details } from '../store/reducers/homeReducer';
 import toast from 'react-hot-toast';
-import { add_to_card, messageClear } from '../store/reducers/cardReducer';
+import { add_to_card, messageClear, add_to_wishlist } from '../store/reducers/cardReducer';
 
 const Details = () => {
     const navigate = useNavigate();
@@ -96,6 +96,23 @@ const Details = () => {
         }
     }
 
+    const add_wishlist = () => {
+        if (userInfo) {
+            dispatch(add_to_wishlist({
+                userId: userInfo.id,
+                productId: product._id,
+                name: product.name,
+                price: product.price,
+                image: product.images[0],
+                discount: product.discount,
+                rating: product.rating,
+                slug: product.slug
+            }));
+        } else {
+            navigate('/login');
+        }
+    }
+
     useEffect(() => {
         if (successMessage) {
             toast.success(successMessage);
@@ -141,7 +158,7 @@ const Details = () => {
             </section>
 
             <section>
-                <div className='w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto pb-10'>
+                <div className='w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto pb-16'>
                     <div className='grid grid-cols-2 md-lg:grid-cols-1 gap-8'>
                         <div>
                             <div className='p-5 border'>
@@ -225,6 +242,7 @@ const Details = () => {
 
                                 <div>
                                     <button
+                                        onClick={add_wishlist}
                                         className='h-[50px] w-[50px] flex justify-center items-center hover:shadow-lg 
                                         hover:shadow-cyan-500/40 bg-cyan-500 text-white'
                                     >
