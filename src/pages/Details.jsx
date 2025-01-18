@@ -124,6 +124,38 @@ const Details = () => {
         }
     }, [successMessage, errorMessage]);
 
+    const buynow = () => {
+        let price = 0;
+        if (product.discount !== 0) {
+            price = product.price - Math.floor((product.price * product.discount) / 100);
+        } else {
+            price = product.price
+        }
+
+        const obj = [
+            {
+                sellerId: product.sellerId,
+                shopName: product.shopName,
+                price: quantity * (product.price - Math.floor((price * 5) / 100)),
+                products: [
+                    {
+                        quantity,
+                        productInfo: product
+                    }
+                ]
+            }
+        ];
+
+        navigate('/shipping', {
+            state: {
+                products: obj,
+                price: price * quantity,
+                shipping_fee: 50,
+                items: 1
+            }
+        });
+    }
+
     return (
         <div>
             <Header />
@@ -300,8 +332,10 @@ const Details = () => {
 
                             <div className='flex gap-3'>
                                 {
-                                    stock ?
-                                        <button className='px-8 py-3 h-[50px] cursor-pointer hover:shadow-lg 
+                                    product.stock ?
+                                        <button
+                                        onClick={buynow}
+                                        className='px-8 py-3 h-[50px] cursor-pointer hover:shadow-lg 
                                         hover:shadow-green-500/40 bg-[#36dab3] text-white'>
                                             Buy Now
                                         </button> : ''
