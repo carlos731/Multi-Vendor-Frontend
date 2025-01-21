@@ -377,12 +377,10 @@ const Details = () => {
                                 <div>
                                     {
                                         state === 'reviews' ?
-                                            <Reviews />
+                                            <Reviews product={product} />
                                             :
                                             <p className='py-5 text-slate-600'>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab consequuntur
-                                                autem officiis, neque repellendus quae sapiente suscipit. Veritatis impedit
-                                                quidem in vero sint cum! Quae pariatur culpa consectetur reprehenderit omnis.
+                                                {product.description}
                                             </p>
                                     }
                                 </div>
