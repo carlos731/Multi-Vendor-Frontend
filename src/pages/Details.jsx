@@ -249,6 +249,7 @@ const Details = () => {
 
                             <div className='text-slate-600'>
                                 <p>{product.description?.substring(0, 230)}{'...'}</p>
+                                <p className='text-slate-600 py-1 font-bold'>Shop Name: {product.shopName}</p>
                             </div>
 
                             <div className='flex gap-3 pb-10 border-b'>
@@ -285,6 +286,7 @@ const Details = () => {
 
                             <div className='flex py-5 gap-5'>
                                 <div className='w-[150px] text-black font-bold text-xl flex flex-col gap-5'>
+                                    as
                                     <span>Availability</span>
                                     <span>Share On</span>
                                 </div>
@@ -390,7 +392,7 @@ const Details = () => {
                         <div className='w-[28%] md-lg:w-full'>
                             <div className='pl-4 md-lg:pl-0'>
                                 <div className='px-3 py-2 text-slate-600 bg-slate-200'>
-                                    <h2 className='font-bold'>From Easy Shop</h2>
+                                    <h2 className='font-bold'>From {product.shopName}</h2>
                                 </div>
 
                                 <div className='flex flex-col gap-5 mt-3 border p-3'>
