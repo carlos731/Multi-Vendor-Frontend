@@ -1,14 +1,33 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { FaBorderAll, FaHeart, FaList } from 'react-icons/fa';
 import { IoIosHome, IoMdLogOut } from 'react-icons/io';
 import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
 import { RiLockPasswordLine } from "react-icons/ri";
+import api from '../api/api';
+import { useDispatch } from 'react-redux';
+import { user_reset } from '../store/reducers/authReducer';
+import { reset_count } from '../store/reducers/cardReducer';
 
 const Dashboard = () => {
     const [filterShow, setFilterShow] = useState(false);
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const logout = async () => {
+        try {
+            const { data } = await api.get('/customer/logout');
+            localStorage.removeItem('customerToken');
+            dispatch(user_reset());
+            dispatch(reset_count());
+            navigate('/login');
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }
 
     return (
         <div>
@@ -48,7 +67,7 @@ const Dashboard = () => {
                                     <span className='text-xl'><RiLockPasswordLine /></span>
                                     <Link to='/dashboard/change-password' className='block' >Change Password  </Link>
                                 </li>
-                                <li className='flex justify-start items-center gap-2 py-2 cursor-pointer'>
+                                <li onClick={logout} className='flex justify-start items-center gap-2 py-2 cursor-pointer'>
                                     <span className='text-xl'><IoMdLogOut /></span>
                                     <div className='block' >Logout </div>
                                 </li>

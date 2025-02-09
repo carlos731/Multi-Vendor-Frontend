@@ -123,6 +123,10 @@ export const cardReducer = createSlice({
         messageClear: (state, _) => {
             state.errorMessage = ''
             state.successMessage = ''
+        },
+        reset_count: (state, _) => {
+            state.card_product_count = 0;
+            state.wishlist_count = 0;
         }
     },
     extraReducers: (builder) => {
@@ -175,5 +179,5 @@ export const cardReducer = createSlice({
     }
 });
 
-export const { messageClear } = cardReducer.actions;
+export const { messageClear, reset_count } = cardReducer.actions;
 export default cardReducer.reducer;
