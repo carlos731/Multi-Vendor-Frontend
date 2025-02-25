@@ -1,13 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import api from '../../api/api';
 
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const add_friend = createAsyncThunk(
     'chat/add_friend',
     async (info, { rejectWithValue, fulfillWithValue }) => {
         try {
-            // await delay(1000);
             const { data } = await api.post('/chat/customer/add-customer-friend', info);
             // console.log(data);
             return fulfillWithValue(data);
