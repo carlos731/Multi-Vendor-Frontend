@@ -81,10 +81,22 @@ export const customer_review = createAsyncThunk(
 
 export const get_reviews = createAsyncThunk(
     'review/get_reviews',
-    async ({productId, pageNumber}, { fulfillWithValue }) => {
+    async ({ productId, pageNumber }, { fulfillWithValue }) => {
         try {
             const { data } = await api.get(`/home/customer/get-reviews/${productId}?pageNo=${pageNumber}`);
             // console.log(data);
+            return fulfillWithValue(data);
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
+);
+
+export const get_banners = createAsyncThunk(
+    'banner/get_banners',
+    async (_, { fulfillWithValue }) => {
+        try {
+            const { data } = await api.get('/banners');
             return fulfillWithValue(data);
         } catch (error) {
             console.log(error.response);
@@ -113,7 +125,8 @@ export const homeReducer = createSlice({
         successMessage: '',
         totalReview: 0,
         rating_review: [],
-        reviews: []
+        reviews: [],
+        banners: [],
     },
     reducers: {
         messageClear: (state, _) => {
@@ -156,6 +169,10 @@ export const homeReducer = createSlice({
                 state.reviews = payload.reviews;
                 state.totalReview = payload.totalReview;
                 state.rating_review = payload.rating_review;
+            })
+
+            .addCase(get_banners.fulfilled, (state, { payload }) => {
+                state.banners = payload.banners;
             })
     }
 });
